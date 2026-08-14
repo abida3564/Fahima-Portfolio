@@ -105,70 +105,247 @@
       padding: 92px 0;
       border-bottom: 1px solid var(--border);
     }
-
     .hero {
-      min-height: calc(100vh - 72px);
-      display: grid;
-      align-items: center;
-      background:
-        radial-gradient(circle at 15% 10%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 34%),
-        radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 30%);
-    }
+  min-height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 85% 18%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 28%),
+    radial-gradient(circle at 8% 82%, color-mix(in srgb, var(--accent-2) 9%, transparent), transparent 30%),
+    var(--bg);
+}
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 52px;
-      align-items: center;
-    }
+.hero-grid {
+  width: min(1400px, calc(100% - 48px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 70px;
+  align-items: center;
+  padding: 70px 0;
+}
 
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: .18em;
-      font-size: .78rem;
-      font-weight: 800;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: .82rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
 
-    h1, h2, h3, p { margin-top: 0; }
-    h1 {
-      font-size: clamp(3rem, 8vw, 6.6rem);
-      line-height: .96;
-      letter-spacing: -.05em;
-      margin-bottom: 24px;
-    }
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 42px;
+  height: 1px;
+  background: var(--accent);
+  margin-right: 14px;
+  vertical-align: middle;
+}
 
-    h2 {
-      font-size: clamp(2rem, 5vw, 4rem);
-      line-height: 1.05;
-      letter-spacing: -.035em;
-      margin-bottom: 18px;
-    }
+h1, h2, h3, p {
+  margin-top: 0;
+}
 
-    .lead {
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
-      color: var(--muted);
-      max-width: 700px;
-    }
+h1 {
+  font-size: clamp(4rem, 7.8vw, 8rem);
+  line-height: .86;
+  letter-spacing: -.065em;
+  margin-bottom: 28px;
+  color: var(--text);
+}
 
-    .hero-card,
-    .placeholder-card {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
+h1 span {
+  display: block;
+  color: var(--accent);
+}
 
-    .hero-card {
-      min-height: 460px;
-      display: grid;
-      place-items: center;
-      padding: 28px;
-      color: var(--muted);
-      text-align: center;
-    }
+.lead {
+  font-size: clamp(1.1rem, 1.55vw, 1.4rem);
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 820px;
+}
 
+.hero-card {
+  min-height: 560px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  padding: 0;
+  overflow: visible;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.hero-card img {
+  width: min(100%, 420px);
+  max-height: 540px;
+  object-fit: contain;
+  object-position: bottom center;
+  display: block;
+  filter: drop-shadow(0 28px 38px rgba(0,0,0,.16));
+} 
+    /* HERO EXTRA STYLES */
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title-line {
+  display: block;
+}
+
+.hero-title-accent {
+  display: block;
+  color: var(--accent);
+}
+
+/* Optional meta pills under the title */
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 28px 0 0;
+}
+
+.hero-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: .86rem;
+}
+
+.hero-meta strong {
+  color: var(--accent-2);
+}
+
+/* Small highlighted line */
+.hero-highlight {
+  margin-top: 24px;
+  color: var(--accent-2);
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+/* Decorative circle behind portrait */
+.hero-card::before {
+  content: "";
+  position: absolute;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  bottom: 35px;
+  z-index: 0;
+}
+
+.hero-card img {
+  position: relative;
+  z-index: 1;
+}
+
+/* DAY MODE */
+:root {
+  --bg: #f4f7f4;
+  --surface: #ffffff;
+  --text: #10211d;
+  --muted: #60706b;
+  --accent: #239b7d;
+  --accent-2: #9a6b10;
+  --border: #dce6e1;
+}
+
+/* DARK MODE */
+[data-theme="dark"] {
+  --bg: #071713;
+  --surface: #0d211b;
+  --text: #f3f8f6;
+  --muted: #b8c8c2;
+  --accent: #63dfbd;
+  --accent-2: #efbd53;
+  --border: #1b3930;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .hero-card {
+    min-height: 500px;
+  }
+
+  .hero-card img {
+    width: min(100%, 380px);
+    max-height: 470px;
+  }
+
+  .hero-card::before {
+    width: 360px;
+    height: 360px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .hero-grid {
+    width: min(100% - 28px, 1400px);
+    padding: 46px 0 55px;
+  }
+
+  h1 {
+    font-size: clamp(3.2rem, 16vw, 5rem);
+    line-height: .9;
+  }
+
+  .eyebrow {
+    font-size: .68rem;
+  }
+
+  .eyebrow::before {
+    width: 26px;
+    margin-right: 8px;
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  .hero-meta span {
+    min-height: 38px;
+    padding: 0 11px;
+    font-size: .74rem;
+  }
+
+  .hero-card {
+    min-height: 420px;
+  }
+
+  .hero-card img {
+    width: 300px;
+    max-height: 390px;
+  }
+
+  .hero-card::before {
+    width: 300px;
+    height: 300px;
+  }
+}
+    
+  
     .actions {
       display: flex;
       gap: 12px;
@@ -297,23 +474,54 @@
 
   <main>
     <!-- SECTION 1: HERO / LANDING -->
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div class="reveal">
-          <div class="eyebrow">Landing Section</div>
-          <h1>Your Name</h1>
-          <p class="lead">We will build this portfolio section by section. The final hero copy, profile image, roles, buttons and animation will be added only after you approve them.</p>
-          <div class="actions">
-            <a class="btn primary" href="#about">Start Portfolio</a>
-            <a class="btn" href="#contact">Contact</a>
-          </div>
-        </div>
+    <section class="hero" id="hero">
+  <div class="hero-inner">
 
-        <div class="hero-card reveal">
-          Hero image / visual will go here after approval.
-        </div>
+    <div class="hero-copy">
+      <p class="hero-eyebrow">
+        TECHNOLOGY · OPERATIONS · INNOVATION · ACCESSIBILITY
+      </p>
+
+      <h1 class="hero-title">
+        Fahima Abida
+        <span>Chowdhury.</span>
+      </h1>
+
+      <div class="hero-meta">
+        <span><strong>B.Sc. in CSE</strong> · UITS</span>
+        <span><strong>Chief Operating Officer</strong> · Sound Vision</span>
+        <span>Dhaka, Bangladesh</span>
       </div>
-    </section>
+
+      <p class="hero-description">
+        I work at the intersection of technology, startup operations,
+        assistive innovation, stakeholder leadership, ecosystem building,
+        and public representation — translating ideas into execution and impact.
+      </p>
+
+      <p class="hero-highlight">
+        Builder who can lead people.
+      </p>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-orbit"></div>
+
+      <img
+        src="assets/images/hero/FahimaAbida.jpg"
+        alt="Fahima Abida Chowdhury"
+        class="hero-photo"
+      />
+
+      <div class="hero-role-card">
+        <span>CURRENT ROLE</span>
+        <strong>Chief Operating Officer</strong>
+        <small>Sound Vision · Assistive Technology</small>
+      </div>
+    </div>
+
+  </div>
+</section>
 
     <!-- SECTION 2: ABOUT -->
     <section id="about">
