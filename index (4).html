@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal portfolio" />
+  <title>Portfolio</title>
+  <style>
+    :root {
+      --bg: #07110f;
+      --surface: #0d1916;
+      --surface-2: #12211d;
+      --text: #f5fbf8;
+      --muted: #a9bbb3;
+      --accent: #78e6b7;
+      --accent-2: #d7b86d;
+      --border: rgba(255,255,255,.1);
+      --shadow: 0 18px 50px rgba(0,0,0,.25);
+      --radius: 22px;
+      --max-width: 1180px;
+    }
+
+    html[data-theme="light"] {
+      --bg: #f7faf8;
+      --surface: #ffffff;
+      --surface-2: #eef6f2;
+      --text: #102019;
+      --muted: #5d6f66;
+      --accent: #16795a;
+      --accent-2: #8a6818;
+      --border: rgba(16,32,25,.12);
+      --shadow: 0 18px 50px rgba(28,55,43,.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background .25s ease, color .25s ease;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .theme-toggle,
+    .menu-toggle {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    .menu-toggle { display: none; }
+
+    main { overflow: hidden; }
+
+    section {
+      padding: 92px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      align-items: center;
+      background:
+        radial-gradient(circle at 15% 10%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 34%),
+        radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 30%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 52px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: .78rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-size: clamp(3rem, 8vw, 6.6rem);
+      line-height: .96;
+      letter-spacing: -.05em;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -.035em;
+      margin-bottom: 18px;
+    }
+
+    .lead {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--muted);
+      max-width: 700px;
+    }
+
+    .hero-card,
+    .placeholder-card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      min-height: 460px;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #062016;
+      border-color: transparent;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 36px;
+    }
+
+    .placeholder-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .placeholder-card {
+      min-height: 180px;
+      padding: 24px;
+      color: var(--muted);
+    }
+
+    .placeholder-card strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    footer {
+      padding: 34px 0 48px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-card { min-height: 340px; }
+      .placeholder-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links {
+        position: absolute;
+        top: 72px;
+        left: 16px;
+        right: 16px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+      .nav-links.open { display: flex; }
+      .menu-toggle { display: inline-grid; place-items: center; }
+    }
+
+    @media (max-width: 620px) {
+      section { padding: 72px 0; }
+      .placeholder-grid { grid-template-columns: 1fr; }
+      .hero-card { min-height: 280px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#home" class="brand">PORTFOLIO</a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#teams">Teams</a></li>
+        <li><a href="#awards">Awards</a></li>
+        <li><a href="#academic">Academic</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle day and night mode">☀</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- SECTION 1: HERO / LANDING -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">Landing Section</div>
+          <h1>Your Name</h1>
+          <p class="lead">We will build this portfolio section by section. The final hero copy, profile image, roles, buttons and animation will be added only after you approve them.</p>
+          <div class="actions">
+            <a class="btn primary" href="#about">Start Portfolio</a>
+            <a class="btn" href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          Hero image / visual will go here after approval.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">About</div>
+          <h2>About section placeholder</h2>
+          <p class="lead">This section is intentionally simple for now. We will replace it with the exact version you want.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: EXPERIENCE -->
+    <section id="experience">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Experience</div>
+          <h2>Professional experience placeholder</h2>
+        </div>
+        <div class="placeholder-grid">
+          <div class="placeholder-card reveal"><strong>Role 01</strong>Content will be added later.</div>
+          <div class="placeholder-card reveal"><strong>Role 02</strong>Content will be added later.</div>
+          <div class="placeholder-card reveal"><strong>Role 03</strong>Content will be added later.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: TEAMS -->
+    <section id="teams">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Teams</div>
+          <h2>Leadership & team section placeholder</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: AWARDS -->
+    <section id="awards">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Awards</div>
+          <h2>Awards & recognition placeholder</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: ACADEMIC -->
+    <section id="academic">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Academic</div>
+          <h2>Academic achievements placeholder</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: CERTIFICATES -->
+    <section id="certificates">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Certificates</div>
+          <h2>Certificates & learning placeholder</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Contact</div>
+          <h2>Contact section placeholder</h2>
+          <p class="lead">Email, LinkedIn, location and final CTA will be added after approval.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Portfolio</div>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      themeToggle.textContent = theme === 'dark' ? '☀' : '☾';
+      localStorage.setItem('portfolio-theme', theme);
+    }
+
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    applyTheme(savedTheme || preferredTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+    });
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
