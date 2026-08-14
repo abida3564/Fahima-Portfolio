@@ -504,3 +504,159 @@ html[data-theme="light"] .team-classic .venture-copy p{
 
   #ecosystem .event-track{grid-auto-columns:88%!important}
 }
+/* =========================================
+   HERO PORTRAIT FINAL POSITION FIX
+   ========================================= */
+
+.portrait-wrap{
+  position:relative!important;
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  min-height:430px!important;
+  padding-top:4px!important;
+  padding-bottom:0!important;
+}
+
+/* portrait goes upward */
+.portrait{
+  width:min(310px,100%)!important;
+  margin-top:-24px!important;
+  margin-bottom:0!important;
+  z-index:2!important;
+}
+
+.portrait img{
+  width:100%!important;
+  height:auto!important;
+  max-height:430px!important;
+  object-fit:contain!important;
+  object-position:center top!important;
+}
+
+/* circle sits LOWER and fits behind lower portrait */
+.portrait-wrap:before{
+  content:"";
+  position:absolute!important;
+  width:350px!important;
+  height:350px!important;
+  border-radius:50%!important;
+  border:1px solid color-mix(in srgb,var(--mint) 48%,transparent)!important;
+
+  left:50%!important;
+  transform:translateX(-50%)!important;
+
+  top:72px!important;
+  bottom:auto!important;
+
+  z-index:0!important;
+}
+
+/* decorative dots */
+.portrait-wrap:after{
+  content:"";
+  position:absolute!important;
+  width:12px!important;
+  height:12px!important;
+  border-radius:50%!important;
+  background:var(--mint)!important;
+
+  top:92px!important;
+  right:10%!important;
+
+  box-shadow:
+    -310px 48px 0 2px var(--mint),
+    18px 280px 0 -2px var(--gold)!important;
+
+  z-index:1!important;
+}
+
+/* role card stays inside the hero */
+.float-card{
+  right:-4px!important;
+  bottom:20px!important;
+  max-width:225px!important;
+  padding:14px 16px!important;
+  z-index:5!important;
+}
+
+/* light mode pink circle */
+html[data-theme="light"] .portrait-wrap:before{
+  border-color:rgba(244,49,123,.36)!important;
+}
+
+/* slightly tighter hero so portrait doesn't drop below screen */
+.hero-grid{
+  padding-top:28px!important;
+  padding-bottom:34px!important;
+}
+
+/* laptop */
+@media(max-width:1100px) and (min-width:901px){
+  .portrait{
+    width:295px!important;
+    margin-top:-18px!important;
+  }
+
+  .portrait-wrap:before{
+    width:335px!important;
+    height:335px!important;
+    top:66px!important;
+  }
+}
+
+/* tablet/mobile */
+@media(max-width:900px){
+  .portrait-wrap{
+    min-height:355px!important;
+    padding-top:0!important;
+  }
+
+  .portrait{
+    width:min(270px,72vw)!important;
+    margin-top:-12px!important;
+  }
+
+  .portrait img{
+    max-height:350px!important;
+  }
+
+  .portrait-wrap:before{
+    width:295px!important;
+    height:295px!important;
+    top:50px!important;
+  }
+
+  .float-card{
+    right:0!important;
+    bottom:4px!important;
+    max-width:205px!important;
+  }
+}
+
+@media(max-width:580px){
+  .portrait-wrap{
+    min-height:310px!important;
+  }
+
+  .portrait{
+    width:min(230px,68vw)!important;
+    margin-top:-8px!important;
+  }
+
+  .portrait img{
+    max-height:300px!important;
+  }
+
+  .portrait-wrap:before{
+    width:250px!important;
+    height:250px!important;
+    top:45px!important;
+  }
+
+  .float-card{
+    max-width:185px!important;
+    padding:10px 12px!important;
+    bottom:0!important;
+  }
+}
